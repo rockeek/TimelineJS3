@@ -764,7 +764,7 @@ export class TimeNav {
             }
             case "ArrowDown":
             case "ArrowLeft": {
-                console.log("Prev item");
+                this.focusPrevious();
                 break;
             }
             case "Home": {
