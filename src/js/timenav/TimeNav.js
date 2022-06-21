@@ -722,6 +722,31 @@ export class TimeNav {
         }
     }
 
+    _onKeydown(e) {
+        DOMEvent.stopPropagation(e);
+
+        switch (e.key) {
+            case "ArrowUp":
+            case "ArrowRight": {
+                console.log("Next item");
+                break;
+            }
+            case "ArrowDown":
+            case "ArrowLeft": {
+                console.log("Prev item");
+                break;
+            }
+            case "Home": {
+                console.log("First item");
+                break;
+            }
+            case "End": {
+                console.log("Last item");
+                break;
+            }
+        }
+    }
+
     /*	Private Methods
     ================================================== */
 
