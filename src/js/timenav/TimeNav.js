@@ -608,6 +608,37 @@ export class TimeNav {
         }
     }
 
+    animateMovement(n, fast, css_animation, duration, ease) {
+        // Stop animation
+        if (this.animator) {
+            this.animator.stop();
+        }
+
+        if (fast) {
+            this._el.slider.className = "tl-timenav-slider";
+            this._el.slider.style.left =
+                -this._markers[n].getLeft() + this.options.width / 2 + "px";
+        } else {
+            if (css_animation) {
+                this._el.slider.className =
+                    "tl-timenav-slider tl-timenav-slider-animate";
+                this.animate_css = true;
+                this._el.slider.style.left =
+                    -this._markers[n].getLeft() + this.options.width / 2 + "px";
+            } else {
+                this._el.slider.className = "tl-timenav-slider";
+                this.animator = Animate(this._el.slider, {
+                    left:
+                        -this._markers[n].getLeft() +
+                        this.options.width / 2 +
+                        "px",
+                    duration: duration,
+                    easing: ease,
+                });
+            }
+        }
+    }
+
     /*	Events
     ================================================== */
     _onLoaded() {
