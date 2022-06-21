@@ -55,9 +55,10 @@ export class TimeNav {
         );
 
         // Prevents inconsistent default keyboard handling by the screen readers
-        this._el.container.setAttribute('role', 'application');
-        this._el.container.setAttribute('aria-label', 'Timeline navigation');
-        this._el.container.setAttribute('aria-description',
+        this._el.container.setAttribute("role", "application");
+        this._el.container.setAttribute("aria-label", "Timeline navigation");
+        this._el.container.setAttribute(
+            "aria-description",
             'Navigate between markers with arrow keys. Press "Home" for the first and "End" for the last markers'
         );
 
@@ -545,6 +546,8 @@ export class TimeNav {
         } else {
             this.current_id = this.current_focused_id = "";
         }
+
+        this._setLabelWithCurrentMarker();
     }
 
     goToId(id, fast, css_animation) {
