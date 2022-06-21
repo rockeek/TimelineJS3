@@ -232,6 +232,12 @@ export class TimeMarker {
         }
     }
 
+    _onMarkerKeydown(e) {
+        if (/Space|Enter/.test(e.code)) {
+            this.fire("markerclick", { unique_id: this.data.unique_id });
+        }
+    }
+
     _onMarkerBlur(e) {
         this.fire("markerblur", { unique_id: this.data.unique_id });
     }
