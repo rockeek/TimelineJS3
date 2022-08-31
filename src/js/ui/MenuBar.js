@@ -1,10 +1,10 @@
-import * as DOM from "../dom/DOM"
-import * as Browser from "../core/Browser"
+import * as DOM from "../dom/DOM";
+import * as Browser from "../core/Browser";
 import Events from "../core/Events";
-import { DOMMixins } from "../dom/DOMMixins"
-import { easeInOutQuint } from "../animation/Ease"
-import { classMixin, mergeData } from "../core/Util"
-import { DOMEvent } from "../dom/DOMEvent"
+import { DOMMixins } from "../dom/DOMMixins";
+import { easeInOutQuint } from "../animation/Ease";
+import { classMixin, mergeData } from "../core/Util";
+import { DOMEvent } from "../dom/DOMEvent";
 import { I18NMixins } from "../language/I18NMixins";
 
 export class MenuBar {
@@ -19,12 +19,12 @@ export class MenuBar {
             arrow: {},
             line: {},
             coverbar: {},
-            grip: {}
+            grip: {},
         };
 
         this.collapsed = false;
 
-        if (typeof elem === 'object') {
+        if (typeof elem === "object") {
             this._el.container = elem;
         } else {
             this._el.container = DOM.get(elem);
@@ -36,8 +36,8 @@ export class MenuBar {
 
         // Data
         this.data = {
-            visible_ticks_dates: {}
-        }
+            visible_ticks_dates: {},
+        };
 
         //Options
         this.options = {
@@ -45,13 +45,13 @@ export class MenuBar {
             height: 600,
             duration: 1000,
             ease: easeInOutQuint,
-            menubar_default_y: 0
+            menubar_default_y: 0,
         };
 
         // Animation
         this.animator = {};
 
-        this.setLanguage(language)
+        this.setLanguage(language);
 
         // Merge Data and Options
         mergeData(this.options, options);
@@ -63,7 +63,6 @@ export class MenuBar {
     /*	Public
     ================================================== */
     show(d) {
-
         var duration = this.options.duration;
         if (d) {
             duration = d;
@@ -74,17 +73,17 @@ export class MenuBar {
 
     toogleZoomIn(show) {
         if (show) {
-            this._el.button_zoomin.removeAttribute('disabled');
+            this._el.button_zoomin.removeAttribute("disabled");
         } else {
-            this._el.button_zoomin.setAttribute('disabled', true);
+            this._el.button_zoomin.setAttribute("disabled", true);
         }
     }
 
     toogleZoomOut(show) {
         if (show) {
-            this._el.button_zoomout.removeAttribute('disabled');
+            this._el.button_zoomout.removeAttribute("disabled");
         } else {
-            this._el.button_zoomout.setAttribute('disabled', true);
+            this._el.button_zoomout.setAttribute("disabled", true);
         }
     }
 
@@ -103,10 +102,10 @@ export class MenuBar {
 
         this.data.visible_ticks_dates = {
             start: firstYear,
-            end: lastYear
+            end: lastYear,
         };
 
-        this._updateZoomAriaLabels()
+        this._updateZoomAriaLabels();
     }
 
     _getTickYear(tick) {
@@ -121,9 +120,9 @@ export class MenuBar {
     ================================================== */
     setColor(inverted) {
         if (inverted) {
-            this._el.container.className = 'tl-menubar tl-menubar-inverted';
+            this._el.container.className = "tl-menubar tl-menubar-inverted";
         } else {
-            this._el.container.className = 'tl-menubar';
+            this._el.container.className = "tl-menubar";
         }
     }
 
@@ -147,39 +146,69 @@ export class MenuBar {
         this.fire("back_to_start", e);
     }
 
-
     /*	Private Methods
     ================================================== */
     _initLayout() {
-
         // Create Layout
-        this._el.button_zoomin = DOM.create('button', 'tl-menubar-button', this._el.container);
-        this._el.button_zoomout = DOM.create('button', 'tl-menubar-button', this._el.container);
-        this._el.button_backtostart = DOM.create('button', 'tl-menubar-button', this._el.container);
+        this._el.button_zoomin = DOM.create(
+            "button",
+            "tl-menubar-button",
+            this._el.container
+        );
+        this._el.button_zoomout = DOM.create(
+            "button",
+            "tl-menubar-button",
+            this._el.container
+        );
+        this._el.button_backtostart = DOM.create(
+            "button",
+            "tl-menubar-button",
+            this._el.container
+        );
 
         if (Browser.mobile) {
             this._el.container.setAttribute("ontouchstart", " ");
         }
 
-        this._el.button_backtostart.innerHTML = "<span class='tl-icon-goback'></span>";
-        this._el.button_backtostart.setAttribute('aria-label', this._('return_to_title'));
+        this._el.button_backtostart.innerHTML =
+            "<span class='tl-icon-goback'></span>";
+        this._el.button_backtostart.setAttribute(
+            "aria-label",
+            this._("return_to_title")
+        );
 
-        this._el.button_zoomin.innerHTML = "<span class='tl-icon-zoom-in'></span>";
-        this._el.button_zoomin.setAttribute('aria-label', this._('zoom_in'));
+        this._el.button_zoomin.innerHTML =
+            "<span class='tl-icon-zoom-in'></span>";
+        this._el.button_zoomin.setAttribute("aria-label", this._("zoom_in"));
 
-        this._el.button_zoomout.innerHTML = "<span class='tl-icon-zoom-out'></span>";
-        this._el.button_zoomout.setAttribute('aria-label', this._('zoom_out'));
+        this._el.button_zoomout.innerHTML =
+            "<span class='tl-icon-zoom-out'></span>";
+        this._el.button_zoomout.setAttribute("aria-label", this._("zoom_out"));
     }
 
     _initEvents() {
-        DOMEvent.addListener(this._el.button_backtostart, 'click', this._onButtonBackToStart, this);
-        DOMEvent.addListener(this._el.button_zoomin, 'click', this._onButtonZoomIn, this);
-        DOMEvent.addListener(this._el.button_zoomout, 'click', this._onButtonZoomOut, this);
+        DOMEvent.addListener(
+            this._el.button_backtostart,
+            "click",
+            this._onButtonBackToStart,
+            this
+        );
+        DOMEvent.addListener(
+            this._el.button_zoomin,
+            "click",
+            this._onButtonZoomIn,
+            this
+        );
+        DOMEvent.addListener(
+            this._el.button_zoomout,
+            "click",
+            this._onButtonZoomOut,
+            this
+        );
     }
 
     // Update Display
     _updateDisplay(width, height, animate) {
-
         if (width) {
             this.options.width = width;
         }
@@ -191,17 +220,19 @@ export class MenuBar {
     // Update Display
     _updateZoomAriaLabels() {
         if (Object.keys(this.data.visible_ticks_dates).length == 0) {
-            this._el.button_zoomin.setAttribute('aria-description', '');
-            this._el.button_zoomout.setAttribute('aria-description', '');
+            this._el.button_zoomin.setAttribute("aria-description", "");
+            this._el.button_zoomout.setAttribute("aria-description", "");
         } else {
-            this._el.button_zoomin.setAttribute('aria-description',
-                this._("aria_label_zoomin",
-                    this.data.visible_ticks_dates));
-            this._el.button_zoomout.setAttribute('aria-description',
-                this._("aria_label_zoomout",
-                    this.data.visible_ticks_dates));
+            this._el.button_zoomin.setAttribute(
+                "aria-description",
+                this._("aria_label_zoomin", this.data.visible_ticks_dates)
+            );
+            this._el.button_zoomout.setAttribute(
+                "aria-description",
+                this._("aria_label_zoomout", this.data.visible_ticks_dates)
+            );
         }
     }
 }
 
-classMixin(MenuBar, DOMMixins, Events, I18NMixins)
+classMixin(MenuBar, DOMMixins, Events, I18NMixins);
